@@ -39,19 +39,20 @@ export default function UserBasket({
   // =====================    All Price In Local Storage ==================
 
   const [dataPriceLocalStorage, setDataPriceLocalStorage] = useState(0);
-
+  const savePriceTolocalStorage = (price) => {
+    localStorage.setItem("allPrice", JSON.stringify(price));
+  };
   useEffect(() => {
-    const allPriceInLocalStorage = localStorageData?.map(
+    const allPriceInLocalStorage = localStorageData.map(
       (item) => item.price * (item.count || 1)
     );
-    console.log(allPriceInLocalStorage);
     let resultAllPriceFoodsInLocalStorage = allPriceInLocalStorage.reduce(
       (acc, num) => acc + num,
       0
     );
     setDataPriceLocalStorage(resultAllPriceFoodsInLocalStorage);
-  }, []);
-  console.log(dataPriceLocalStorage);
+  }, [arrayUserBasket , localStorageData ]);
+
 
   // ======================================================================
 
@@ -63,7 +64,6 @@ export default function UserBasket({
       : localStorageData?.length > 0
       ? localStorageData
       : [];
-  console.log("basketToRender ===> ", basketToRender);
 
   // =======================================================================
 
@@ -97,10 +97,11 @@ export default function UserBasket({
                   <BoxUserBasketForLocalStorage
                     deleteFoodInUserBasket={deleteFoodInUserBasket}
                     setIdProductInBasket={setIdProductInBasket}
-                    setArrayUserBasket={setArrayUserBasket}
                     localStorageData={localStorageData}
+                    setArrayUserBasket={setArrayUserBasket}
+                    arrayUserBasket={setArrayUserBasket}
+                    setLocalStorageData={setLocalStorageData}
                     foods={foods}
-                    arrayUserBasket={arrayUserBasket}
                     addToBasketUser={addToBasketUser}
                     menu={arrayUserBasket}
                   />
@@ -128,37 +129,6 @@ export default function UserBasket({
                 <span>سبد خرید شما خالی میباشد</span>
               </div>
             )}
-            {/* {localStorageData.length
-              ? localStorageData.map((foods) => (
-                  <BoxUserBasketForLocalStorage
-                    setArrayUserBasket={setArrayUserBasket}
-                    localStorageData={localStorageData}
-                    foods={foods}
-                  />
-                ))
-              : null}
-            {arrayUserBasket?.length ? (
-              arrayUserBasket?.map((item) => (
-                <BoxUserBasket
-                  arrayUserBasket={arrayUserBasket}
-                  setArrayUserBasket={setArrayUserBasket}
-                  addToBasketUser={addToBasketUser}
-                  deleteFoodInUserBasket={deleteFoodInUserBasket}
-                  item={item}
-                  menu={arrayUserBasket}
-                  setIdProductInBasket={setIdProductInBasket}
-                />
-              ))
-            ) : (
-              <div className="flex flex-col items-center justify-center h-full">
-                <img
-                  className="w-44 "
-                  src="./../images/basket/notF.png"
-                  alt=""
-                />
-                <span>سبد خرید شما خالی میباشد</span>
-              </div>
-            )} */}
           </div>
         </div>
         <div className="flex items-center gap-5 flex-col">
@@ -172,10 +142,14 @@ export default function UserBasket({
                   <span className="text-sm">مجموع هزینه:</span>
                 </div>
                 <div className="flex text-sm items-center gap-1">
-                  <span>
-                    {fainalyAllPriceFoods || dataPriceLocalStorage.toLocaleString()}
-                  </span>
-                  <span> تومان</span>
+                  {basketToRender.length > 0 && (
+                    <span>
+                      {fainalyAllPriceFoods > 0
+                        ? fainalyAllPriceFoods.toLocaleString()
+                        : dataPriceLocalStorage.toLocaleString()}
+                      تومان
+                    </span>
+                  )}
                 </div>
               </div>
               <button className="cursor-pointer bg-[#2EC4B6] text-white flex gap-1 w-full items-center justify-center p-3 rounded-xl">

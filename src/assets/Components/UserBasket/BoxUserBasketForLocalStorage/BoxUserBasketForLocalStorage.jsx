@@ -1,42 +1,42 @@
 import React, { useEffect, useRef, useState } from "react";
 
-export default function BoxUserBasketForLocalStorage({ foods ,localStorageData,
- CalculatorUserBasket,addToBasketUser , item ,menu , setIdProductInBasket , deleteFoodInUserBasket }) {
+export default function BoxUserBasketForLocalStorage({
+  foods,
+  localStorageData,
+  CalculatorUserBasket,
+  setLocalStorageData,
+  addToBasketUser,
+  setArrayUserBasket,
+  arrayUserBasket,
+  item,
+  menu,
+  setIdProductInBasket,
+  deleteFoodInUserBasket,
+}) {
   const [count, setCount] = useState(0);
 
   // وضعیت لودر برای دکمه "افزودن به سبد خرید"
   const [isStyleLoader, setIsStyleLoader] = useState(false);
 
-  // // سبد خرید که از localStorage بارگذاری میشه (اولین بار)
-  const [arrayUserBasket, setArrayUserBasket] = useState(() => {
-    const stored = localStorage.getItem("basket");
-    return stored ? JSON.parse(stored) : [];
-  });
-
-  
-
-
-
   // آپدیت کردن سبد خرید هم در localStorage و هم در state
   const updateLocalStorage = (basket) => {
     localStorage.setItem("basket", JSON.stringify(basket));
-    setArrayUserBasket(basket);
+    // setArrayUserBasket(basket);
   };
 
   // افزایش تعداد یک محصول خاص در سبد خرید
   const increaseCount = (product) => {
     // console.log(arrayUserBasket);
-    
-    
+
     const updatedBasket = [...localStorageData];
-    const item = updatedBasket.find((i) => i.id === product.id)
+    const item = updatedBasket.find((i) => i.id === product.id);
     console.log(item);
-    
+
     if (item) {
       item.count++;
       updateLocalStorage(updatedBasket);
 
-    //   addToBasketUser(product);
+      //   addToBasketUser(product);
     } else {
       alert("این کالا در سبد خرید وجود ندارد 🙄");
     }
@@ -68,8 +68,6 @@ export default function BoxUserBasketForLocalStorage({ foods ,localStorageData,
     }
   };
 
-
-
   // خروجی رندر کامپوننت
 
   //  ================== Clear Count ===========================
@@ -82,15 +80,18 @@ export default function BoxUserBasketForLocalStorage({ foods ,localStorageData,
   // ===============    Handle Delete In Local Storage   ================
 
   const handleDeleteInLocalStorage = () => {
-    const newArryAfterDelete = [...localStorageData]
-    const afterDeleteOnFoods = newArryAfterDelete.filter(item => item.id !== foods.id)
-    updateLocalStorage(afterDeleteOnFoods)
-    console.log("afterDeleteOnFoods ======> ",afterDeleteOnFoods);
-    setArrayUserBasket(afterDeleteOnFoods)
-    
-    
-    
-  }
+    const newArryAfterDelete = [...localStorageData];
+    const afterDeleteOnFoods = newArryAfterDelete.filter(
+      (item) => item.id !== foods.id
+    );
+    updateLocalStorage(afterDeleteOnFoods);
+    setLocalStorageData(afterDeleteOnFoods);
+    if (newArryAfterDelete.length == 0) {
+      setArrayUserBasket([]);
+      console.log(arrayUserBasket);
+    }
+    console.log("afterDeleteOnFoods ======> ", afterDeleteOnFoods);
+  };
 
   // ====================================================================
   const wrapperDeleteBtn = useRef();
@@ -98,17 +99,19 @@ export default function BoxUserBasketForLocalStorage({ foods ,localStorageData,
   const btnDeleteFood = useRef();
   const LoaderDeleteFood = useRef();
 
-  function styleAndDeletOnFoods(e, itemID) {
-    console.log(e.parentElement);
+  // function styleAndDeletOnFoods(e, itemID) {
+  //   console.log(foods.id);
 
-    setTimeout(() => {
-      deleteFoodInUserBasket(itemID);
-    }, 1000);
-  }
+  //   setLocalStorageData(arrayUserBasket)
+  //   setTimeout(() => {
+  //     deleteFoodInUserBasket(foods.id);
+  //     console.log(localStorageData);
 
-  useEffect(() => {
-    console.log(foods);
-  }, []);
+  //     // setArrayUserBasket(arrayUserBasket);
+  //     localStorage.setItem("basket", JSON.stringify(arrayUserBasket));
+  //   }, 1000);
+  // }
+
   return (
     <div
       ref={wrapperFoods}
@@ -149,7 +152,7 @@ export default function BoxUserBasketForLocalStorage({ foods ,localStorageData,
           </div>
           <div
             ref={wrapperDeleteBtn}
-            onClick={(e) => styleAndDeletOnFoods(e, foods.id)}
+            // onClick={(e) => styleAndDeletOnFoods(e, foods.id)}
             className=" text-sm pt-1 flex items-center justify-center rounded-sm mb-1 cursor-pointer hover:bg-red-700 transition-all pr-3 pl-3 bg-red-500 pb-1 text-white"
           >
             <div

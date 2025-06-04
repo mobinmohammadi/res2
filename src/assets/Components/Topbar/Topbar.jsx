@@ -14,7 +14,6 @@ export default function Topbar({
 }) {
   const loaderIconBasket = useRef(null);
 
-
   const [isShowModalLogin, setIsShowModalLogin] = useState(false);
   const [isShowUserBasket, setIsShowUserBasket] = useState(false);
   const [isShowLayer, setIsShowLayer] = useState(false);
@@ -68,37 +67,41 @@ export default function Topbar({
   // ==================================================================
   // const loaderAddToBasket = useRef(null);
   const [isShowLoaderAddToBasket, setIsShowLoaderAddToBasket] = useState(false);
-  const [dataLocalStorage, setDataLocalStorage] = useState({})
-
+  const [dataLocalStorage, setDataLocalStorage] = useState({});
 
   useEffect(() => {
-    const storedByLocalStorage = JSON.parse(localStorage.getItem("basket")) || []
-    console.log(storedByLocalStorage);
+    const storedByLocalStorage =
+      JSON.parse(localStorage.getItem("basket")) || [];
     if (storedByLocalStorage.length) {
-      setDataLocalStorage(storedByLocalStorage)
+      setDataLocalStorage(storedByLocalStorage);
     }
+  }, []);
 
-
-  }, [])
-
-  const resultWhatsBasket = arrayUserBasket?.length > 0 ? arrayUserBasket : dataLocalStorage?.length > 0 ? dataLocalStorage : []
-
+  const resultWhatsBasket =
+    arrayUserBasket?.length > 0
+      ? arrayUserBasket
+      : dataLocalStorage?.length > 0
+      ? dataLocalStorage
+      : [];
 
   return (
     <>
       <svg className="hidden"></svg>
       <div
-        className={`${isFixedTopBar
+        className={`${
+          isFixedTopBar
             ? "fixed top-0 z-30 w-full transition-all bg-slate-700 "
             : ""
-          } py-2`}
+        } py-2`}
       >
         <div className=" relative">
           <div className="flex relative space-y-2 pt-3 justify-between  items-center pr-4 pl-4   ">
             {isUserLogin ? (
               <div
                 onClick={() => navUserInfos()}
-                className={`${isFixedTopBar ? "text-white" : "text-zinc-800"} items-cemter justify-center flex gap-1 text-white cursor-pointer`}
+                className={`${
+                  isFixedTopBar ? "text-white" : "text-zinc-800"
+                } items-cemter justify-center flex gap-1 text-white cursor-pointer`}
               >
                 <span className="text-xs">مبین محمدی</span>
                 <svg className={`w-3 h-3  xs:w-5 xs:h-5 pb-1`}>
@@ -208,23 +211,29 @@ export default function Topbar({
                   </div>
                 )
               ) : null}
-              {!dataLocalStorage.length || !arrayUserBasket ? null : (
+              {dataLocalStorage?.length || arrayUserBasket?.lenght ? (
                 <div className="absolute text-xs -right-2 -top-2 flex items-center justify-center text-white  bg-red-500 w-5 h-5 rounded-2xl">
-                  <span className="mt-1">{arrayUserBasket?.length || dataLocalStorage?.length}</span>
+                  <span className="mt-1">
+                    {dataLocalStorage?.length || arrayUserBasket?.length}
+                  </span>
                 </div>
-              )}
+              ) : null}
               {/* <span className="Loader-Basket absolute -right-1 shadow-2xl -top-1"></span> */}
               <div className="cursor-pointer relative">
-
-                <div className={`${isFixedTopBar ? "text-white" : "text-zinc-700"}  `}>
+                <div
+                  className={`${
+                    isFixedTopBar ? "text-white" : "text-zinc-700"
+                  }  `}
+                >
                   <svg className="w-6 h-6 sm:w-8 sm:h-8">
                     <use href="#shopping-cart"></use>
                   </svg>
                 </div>
 
                 <div
-                  className={`${isShowLoaderAddToBasket ? "opacity-100 " : "opacity-0"
-                    } absolute -top-2.5  rounded-full flex items-center justify-center -right-2.5 `}
+                  className={`${
+                    isShowLoaderAddToBasket ? "opacity-100 " : "opacity-0"
+                  } absolute -top-2.5  rounded-full flex items-center justify-center -right-2.5 `}
                 >
                   <span className="loader-iconBaket"></span>
                 </div>
@@ -272,7 +281,6 @@ export default function Topbar({
             </div>
           </div>
         </div>
-
 
         <UserBasket
           CalculatorUserBasket={CalculatorUserBasket}
