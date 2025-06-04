@@ -13,6 +13,7 @@ import CityNameFreeSee from "../../Components/CityNameFreeSee/CityNameFreeSee.js
 import { CartProvider } from "../../Components/Context/Context.jsx";
 import FooterMobile from "../../Components/FooterMobile/FooterMobile.jsx";
 import { Toaster, toast } from "react-hot-toast";
+import SimpleSlider from "../../Components/SliderHomePageOffer/SliderHomePageOffer.jsx";
 
 export default function Home() {
   // const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -153,6 +154,8 @@ export default function Home() {
         </div>
       </div>
       <Toaster position="top-center" />
+
+        <SimpleSlider />
 
       <FooterMobile />
       {/* <div className="bg-zinc-700 w-full h-full z-40 fixed top-0">s</div> */}

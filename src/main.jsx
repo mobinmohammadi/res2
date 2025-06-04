@@ -11,6 +11,8 @@ import HomePanel from "./assets/Components/PanelSaller/HomeSellerPanel/HomePanel
 import SignUp from "./assets/Page/SignUp/SignUp.jsx";
 import Login from "./assets/Components/RegistrationAndAuthentication/Login/Login.jsx";
 import PanelSellerResturants from "./assets/Page/PanelSellerResturants/PanelSellerResturants.jsx";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>

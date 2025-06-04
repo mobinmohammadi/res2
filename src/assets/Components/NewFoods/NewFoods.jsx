@@ -13,18 +13,19 @@ export default function NewFoods() {
   //   .then(data => setAllResturants(data))
   // },[])
   return (
-    <div className="mt-10">
-      <SectionHeader title="جدید ترین ها" />
+    <div>
+    {/* // <div className="mt-10">
+    //   <SectionHeader title="جدید ترین ها" />
        
-      <div className="grid xs:grid-cols-2 sm:grid-cols-3  gap-8 mt-10">
-      {allResturants.slice(0,3).map(foods => (
+    //   <div className="grid xs:grid-cols-2 sm:grid-cols-3  gap-8 mt-10">
+    //   {allResturants.slice(0,3).map(foods => ( */}
 
 
-      <BoxesAroundMeFood key={foods.id}  {...foods} />
-      ))}
+    {/* //   <BoxesAroundMeFood key={foods.id}  {...foods} /> */}
+    {/* //   ))} */}
 
  
-      </div>
+    {/* //   </div> */}
     </div>
   );
 }

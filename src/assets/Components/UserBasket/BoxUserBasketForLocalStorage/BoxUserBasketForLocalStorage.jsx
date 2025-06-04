@@ -44,7 +44,6 @@ export default function BoxUserBasketForLocalStorage({
 
   //================================================
 
-  // کاهش تعداد یک محصول خاص در سبد خرید (یا حذف کامل اگه تعداد بشه ۰)
   const decreaseCount = (product) => {
     const updatedBasket = [...localStorageData];
     const index = updatedBasket.findIndex((i) => i.id === product.id);
