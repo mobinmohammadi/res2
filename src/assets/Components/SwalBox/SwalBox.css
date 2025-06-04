@@ -1,0 +1,15 @@
+.active-progress{
+  width: 100%;
+  transition: all 2s ease;
+  height: 100%;
+  position: block;
+  background-color: #f1010d ;
+}
+
+.showSwal{
+    transition: all 1.5s ease-in-out;
+}
+
+.showNormalSpeedShow{
+    transition: all 1s ease-in-out;
+}
