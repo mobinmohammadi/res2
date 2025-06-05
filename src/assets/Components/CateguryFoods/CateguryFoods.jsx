@@ -18,6 +18,8 @@ export default function CateguryFoods() {
   const [visibleRestorunts, setVisibleRestorunts] = useState(4);
   // const [afterTheFilterRestorants , setAfterTheFilterRestorants] = useState
 
+  const loaderCategury = useRef()
+
   const addShowMoreFoodes = () => {
     setTimeout(() => {
       setVisibleRestorunts((prev) => (prev += 2));
@@ -26,19 +28,22 @@ export default function CateguryFoods() {
 
   const param = useParams();
   const modeFilter = { mode: param["*"] };
-  console.log(modeFilter.mode);
+
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+    setTimeout(() => {
+      loaderCategury.current.classList.remove("fixed")
+      loaderCategury.current.classList.add("hidden")
+    }, 1700);
+  },[])
+
+
 
   //  ===================== Name Categury =======================
-  // pizza
-  // kabab
-  // sop
-  // sandewich
-  // iraninfood
-  // sokhari
-  // pasta
-  // salad
-  // breakefast
-  // stick
+
+
+
   let titleCateguryFoods = "";
   function categuryNameHandler() {
     switch (modeFilter.mode) {
@@ -79,16 +84,12 @@ export default function CateguryFoods() {
   }
 
   titleCateguryFoods = categuryNameHandler();
-  console.log(titleCateguryFoods);
 
   // useEffect(() => {
   //   categuryNameHandler();
   // }, []);
 
-  function emptyTitleCategury() {
-    titleCateguryFoods = "";
-    console.log("✅");
-  }
+
 
   // ============================================================
 
@@ -198,7 +199,6 @@ export default function CateguryFoods() {
               <span>{titleCateguryFoods}</span>
               <Link to="/categuryfoods">
                 <svg
-                  onClick={() => emptyTitleCategury()}
                   className="w-5 h-5 absolute left-1 top-1.5 text-yellow-500"
                 >
                   <use href="#x-mark"></use>
@@ -327,6 +327,9 @@ export default function CateguryFoods() {
       ) : (
         ""
       )}
+      <div ref={loaderCategury} className="fixed bg-sky-800 flex items-center justify-center top-0 w-full h-full z-20">
+        <span className="loader-categury"></span>
+      </div>
 
       {!allRestourants.length > 5 ||
       visibleRestorunts >= allRestourants.length ? null : (
