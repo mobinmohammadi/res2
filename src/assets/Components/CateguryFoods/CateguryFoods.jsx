@@ -9,16 +9,23 @@ import RestorantsData from "./../../../../RestorantsData.json";
 import FooterMobile from "../FooterMobile/FooterMobile";
 import { Toaster } from "react-hot-toast";
 import { Link, useParams } from "react-router";
+import BoxesSearchCategury from "./BoxesSearchCategury/BoxesSearchCategury";
 export default function CateguryFoods() {
   const [searchValue, setSearchValue] = useState("");
   // const [isShowFiltredBoxes , setIsShowFiltredBoxes] = useState(false)
   const [isShowLayer, setIsShowLayer] = useState(false);
-  const [modeFiltred, setModFiltred] = useState("filter-result");
   const [allRestourants, setAllRestourants] = useState(RestorantsData);
+  const [filterdProductCategury, setFilterdProductCategury] = useState([]);
+  const [originalRestourants, setOriginalRestourants] = useState([
+    ...allRestourants,
+  ]);
+  const [titleFilter, setTitleFilter] = useState("");
+
   const [visibleRestorunts, setVisibleRestorunts] = useState(4);
   // const [afterTheFilterRestorants , setAfterTheFilterRestorants] = useState
 
-  const loaderCategury = useRef()
+  const boxsFiltred = useRef(null);
+  const loaderCategury = useRef(null);
 
   const addShowMoreFoodes = () => {
     setTimeout(() => {
@@ -29,20 +36,24 @@ export default function CateguryFoods() {
   const param = useParams();
   const modeFilter = { mode: param["*"] };
 
-
-  useEffect(()=>{
-    window.scrollTo(0,0)
+  useEffect(() => {
+    window.scrollTo(0, 0);
     setTimeout(() => {
-      loaderCategury.current.classList.remove("fixed")
-      loaderCategury.current.classList.add("hidden")
+      loaderCategury.current.classList.remove("fixed");
+      loaderCategury.current.classList.add("hidden");
     }, 1700);
-  },[])
+  }, []);
 
-
+  const closBox = () => {
+    setIsShowLayer(false);
+    boxsFiltred.current.classList.add(
+      "opacity-0",
+      "top-[90%]",
+      "transition-all"
+    );
+  };
 
   //  ===================== Name Categury =======================
-
-
 
   let titleCateguryFoods = "";
   function categuryNameHandler() {
@@ -85,42 +96,17 @@ export default function CateguryFoods() {
 
   titleCateguryFoods = categuryNameHandler();
 
-  // useEffect(() => {
-  //   categuryNameHandler();
-  // }, []);
-
-
-
-  // ============================================================
-
   // ===============================================================
 
   const restoruntsToShow = allRestourants.slice(0, visibleRestorunts);
-  const boxsFiltred = useRef();
-  const handelBox = () => {
-    boxsFiltred.current.style.display = "block";
-    setIsShowLayer(true);
-    setTimeout(() => {
-      boxsFiltred.current.style.top = "120%";
-      boxsFiltred.current.style.transition = "all 0.1s ease";
-    }, 5);
-  };
-  const closBox = () => {
-    setIsShowLayer(false);
-    boxsFiltred.current.style.top = "90%";
-    setTimeout(() => {
-      boxsFiltred.current.style.display = "none";
-      boxsFiltred.current.style.transition = "all 0.5s ease-in-oute";
-    }, 100);
-  };
 
   let resultAfterSearch = [];
 
   const heandleSearchFoods = (e) => {
-    let value = e.target.value.trim()
+    let value = e.target.value.trim();
     setSearchValue(value);
     if (searchValue.length < 3 || !value.length) {
-      setAllRestourants(RestorantsData)
+      setAllRestourants(RestorantsData);
       // getAllRestorants();
     } else {
       resultAfterSearch = allRestourants.filter((resturant) => {
@@ -138,6 +124,16 @@ export default function CateguryFoods() {
     getAllRestorants();
   }, []);
 
+  useEffect(() => {
+    console.log(filterdProductCategury);
+  }, [filterdProductCategury]);
+
+  const whatsLenghtArray =
+    filterdProductCategury.length > 0
+      ? filterdProductCategury
+      : allRestourants.length > 0
+      ? allRestourants
+      : [];
   // ===============================================================
 
   return (
@@ -187,7 +183,10 @@ export default function CateguryFoods() {
               placeholder="جستو جوی رستوران یا غذا ..."
             />
             {searchValue.length > 3 && (
-              <div onClick={() => setSearchValue("")} className=" absolute left-2 top-2 rounded-full bg-gray-200 w-6 h-6 flex items-center justify-center">
+              <div
+                onClick={() => setSearchValue("")}
+                className=" absolute left-2 top-2 rounded-full bg-gray-200 w-6 h-6 flex items-center justify-center"
+              >
                 <svg className="cursor-pointer w-4 h-4 ">
                   <use href="#x-mark"></use>
                 </svg>
@@ -198,95 +197,25 @@ export default function CateguryFoods() {
             <div className="mt-5 text-xs relative bg-zinc-800 text-white w-[80%] pt-2 pb-2 pr-2 rounded-sm">
               <span>{titleCateguryFoods}</span>
               <Link to="/categuryfoods">
-                <svg
-                  className="w-5 h-5 absolute left-1 top-1.5 text-yellow-500"
-                >
+                <svg className="w-5 h-5 absolute left-1 top-1.5 text-yellow-500">
                   <use href="#x-mark"></use>
                 </svg>
               </Link>
             </div>
           )}
         </div>
-        <div>
-          <div className="relative">
-            <div
-              onClick={() => handelBox()}
-              className="flex  rounded-md w-full pt-2 pb-2 pr-4 pl-5 text-zinc-800 font-bold cursor-pointer gap-2  bg-gray-200"
-            >
-              <svg className="w-7 h-7">
-                <use href="#adjustments-horizontal"></use>
-              </svg>
-              <span className="text-[10px] hidden sm:inline-block">
-                فیلتر و مرتب سازی
-              </span>
-            </div>
-
-            <div
-              ref={boxsFiltred}
-              className={`absolute transition-all hidden z-20 left-0  bg-white w-72 sm:w-92 rounded-2xl p-5`}
-            >
-              <div className="flex text-xs sm:text-sm justify-between pb-5 & > *:cursor-pointer $ > *:pb-3">
-                <span
-                  onClick={() => setModFiltred("filter-result")}
-                  className={`${
-                    modeFiltred == "filter-result"
-                      ? "active--filterd transition-[0.2s]"
-                      : ""
-                  } w-full text-center `}
-                >
-                  فیلتر نتایج
-                </span>
-                <span
-                  onClick={() => setModFiltred("filter-sort")}
-                  className={`${
-                    modeFiltred == "filter-sort"
-                      ? "active--filterd transition-[0.2s]"
-                      : ""
-                  } w-full text-center`}
-                >
-                  مرتب سازی
-                </span>
-              </div>
-              <span className="w-full h-[2px] mt-2 mb-2 bg-[#eeeeee] inline-block"></span>
-              {modeFiltred == "filter-result" ? (
-                <div className="pb-3">
-                  <ul className="flex text-xs sm:text-sm flex-col gap-4 & > *:flex & > *:items-center & > *:gap-1">
-                    <li className="flex items-center">
-                      <input className="" type="checkbox" name="" id="" />
-                      <span className="">غذای نیمه آماده</span>
-                    </li>
-                    <li>
-                      <input type="checkbox" name="" id="" />
-                      <span>غذای نیمه آماده</span>
-                    </li>
-                    <li>
-                      <input type="checkbox" name="" id="" />
-                      <span>غذای نیمه آماده</span>
-                    </li>
-                    <li>
-                      <input type="checkbox" name="" id="" />
-                      <span>غذای نیمه آماده</span>
-                    </li>
-                  </ul>
-                </div>
-              ) : (
-                <div className="pb-3">
-                  <ul className="flex text-xs sm:text-sm flex-col gap-5 ">
-                    <li>کمترین فاصله</li>
-                    <li>کمترین فاصله</li>
-                    <li>کمترین فاصله</li>
-                    <li>کمترین فاصله</li>
-                  </ul>
-                </div>
-              )}
-              <span className="w-full h-[2px] mt-2 mb-2 bg-[#eeeeee] inline-block"></span>
-              <div className="pt-1 & > *:cursor-pointer & > *:text-x & > *:sm:text-sm & > *:rounded-md & > *:w-full flex gap-3 & > *:text-xs & > *:pt-2 & > *:pb-2 & > *:pr-2 & > *:pl-2  & > *:sm:pt-3 & > *:sm:pb-3 & > *:sm:pr-3 & > *:sm:pl-3 & > *:font-bold  & > *:border-[#ef4123] & > *:border-2  ">
-                <button className="bg-[#ef4123] text-white">اعمال</button>
-                <button>حذف فیلتر ها</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <BoxesSearchCategury
+          loaderCategury={loaderCategury}
+          setTitleFilter={setTitleFilter}
+          closBox={closBox}
+          originalRestourants={originalRestourants}
+          setOriginalRestourants={setOriginalRestourants}
+          setAllRestourants={setAllRestourants}
+          setFilterdProductCategury={setFilterdProductCategury}
+          allRestourants={allRestourants}
+          boxsFiltred={boxsFiltred}
+          setIsShowLayer={setIsShowLayer}
+        />
       </div>
       <div className="container-foods ">
         <div className="flex mt-9 mb-6 justify-between items-center">
@@ -302,6 +231,12 @@ export default function CateguryFoods() {
             <span className="mt-0.5 text-xs sm:text-sm">مورد یافت شد</span>
           </div>
         </div>
+        <div className="relative border-b-2 w-48 mt-10 pb-3 border-dashed border-zinc-700">
+          <span className="absolute bg-yellow-500 w-4 h-4 rounded-sm top-1"></span>
+          <span className="mr-5 text-sm font-bold text-red-800">
+            {titleFilter}
+          </span>
+        </div>
         {!allRestourants.length ? (
           <div className="w-full flex items-center justify-center">
             <span className="bg-red-500 mt-5 w-full mb-5 items-center justify-center text-center pt-2 pb-2 text-white rounded-md text-sm sm:text-xl">
@@ -312,7 +247,7 @@ export default function CateguryFoods() {
         ) : (
           <div className="mt-7  grid gap-5 grid-cols-1 2xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {restoruntsToShow.map((resturant) => (
-              <BoxesAroundMeFood allRestorants={resturant} />
+              <BoxesAroundMeFood key={resturant.id} allRestorants={resturant} />
             ))}
           </div>
         )}
@@ -327,7 +262,10 @@ export default function CateguryFoods() {
       ) : (
         ""
       )}
-      <div ref={loaderCategury} className="fixed bg-sky-800 flex items-center justify-center top-0 w-full h-full z-20">
+      <div
+        ref={loaderCategury}
+        className="fixed bg-sky-800 flex items-center justify-center top-0 w-full h-full z-20"
+      >
         <span className="loader-categury"></span>
       </div>
 
