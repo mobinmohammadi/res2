@@ -6,7 +6,9 @@ import BoxesAroundMeFood from "../BoxesAroundMeFood/BoxesAroundMeFood";
 import SeeMoreBoxes from "../SeeMoreBoxes/SeeMoreBoxes";
 import FooterPc from "../FooterPc/FooterPc";
 import RestorantsData from "./../../../../RestorantsData.json";
-import FooterMobile from "../FooterMobile/FooterMobile"
+import FooterMobile from "../FooterMobile/FooterMobile";
+import { Toaster } from "react-hot-toast";
+import { Link, useParams } from "react-router";
 export default function CateguryFoods() {
   const [searchValue, setSearchValue] = useState("");
   // const [isShowFiltredBoxes , setIsShowFiltredBoxes] = useState(false)
@@ -16,16 +18,81 @@ export default function CateguryFoods() {
   const [visibleRestorunts, setVisibleRestorunts] = useState(4);
   // const [afterTheFilterRestorants , setAfterTheFilterRestorants] = useState
 
-
-  
-
-  
-  
   const addShowMoreFoodes = () => {
     setTimeout(() => {
       setVisibleRestorunts((prev) => (prev += 2));
     }, 2000);
   };
+
+  const param = useParams();
+  const modeFilter = { mode: param["*"] };
+  console.log(modeFilter.mode);
+
+  //  ===================== Name Categury =======================
+  // pizza
+  // kabab
+  // sop
+  // sandewich
+  // iraninfood
+  // sokhari
+  // pasta
+  // salad
+  // breakefast
+  // stick
+  let titleCateguryFoods = "";
+  function categuryNameHandler() {
+    switch (modeFilter.mode) {
+      case "pizza":
+        return "جستوجوی پیتزا";
+
+      case "kabab":
+        return "جستوجوی کباب";
+
+      case "sop":
+        return "جستوجوی سوپ";
+
+      case "sandewich":
+        return "جستوجوی ساندویچ";
+
+      case "iraninfood":
+        return "جستوجوی غذای ایرانی";
+
+      case "sokhari":
+        return "جستوجوی سوخاری";
+
+      case "pasta":
+        return "جستوجوی پاستا";
+
+      case "salad":
+        return "جستوجوی سالاد";
+
+      case "breakefast":
+        return "جستوجوی صبحانه";
+
+      case "stick":
+        return "جستوجوی ستیک";
+
+      default: {
+        ("");
+      }
+    }
+  }
+
+  titleCateguryFoods = categuryNameHandler();
+  console.log(titleCateguryFoods);
+
+  // useEffect(() => {
+  //   categuryNameHandler();
+  // }, []);
+
+  function emptyTitleCategury() {
+    titleCateguryFoods = "";
+    console.log("✅");
+  }
+
+  // ============================================================
+
+  // ===============================================================
 
   const restoruntsToShow = allRestourants.slice(0, visibleRestorunts);
   const boxsFiltred = useRef();
@@ -49,25 +116,28 @@ export default function CateguryFoods() {
   let resultAfterSearch = [];
 
   const heandleSearchFoods = (e) => {
-    setSearchValue(e.target.value);
-    if (searchValue.length < 3 || e.target.value == "") {
-      getAllRestorants();
+    let value = e.target.value.trim()
+    setSearchValue(value);
+    if (searchValue.length < 3 || !value.length) {
+      setAllRestourants(RestorantsData)
+      // getAllRestorants();
     } else {
       resultAfterSearch = allRestourants.filter((resturant) => {
-         return resturant.name.includes(searchValue)
-         
+        return resturant.name.includes(searchValue);
       });
       setAllRestourants(resultAfterSearch);
     }
   };
 
   const getAllRestorants = () => {
-      setAllRestourants(RestorantsData)
+    setAllRestourants(RestorantsData);
   };
 
   useEffect(() => {
     getAllRestorants();
   }, []);
+
+  // ===============================================================
 
   return (
     <div className="flex flex-col">
@@ -105,25 +175,43 @@ export default function CateguryFoods() {
         </symbol>
       </svg>
       <Topbar />
-      <div className="flex items-center mt-5 gap-5 w-[80%] mx-auto h-13">
-        <div className="relative  flex z-10  bg-white pt-3 pb-3 w-[75%] rounded-md overflow-hidden">
-          <input
-            onChange={(e) => heandleSearchFoods(e)}
-            type="text"
-            className="bg-white w-full pl-9 text-x sm:text-sm focus:outline-0 pr-2 sm:pr-4  font-bold h-full"
-            placeholder="جستو جوی رستوران یا غذا ..."
-          />
-          <div className=" absolute left-2 top-2 rounded-full bg-gray-200 w-6 h-6 flex items-center justify-center">
-            <svg className="cursor-pointer w-4 h-4 ">
-              <use href="#x-mark"></use>
-            </svg>
+      <div className="flex mt-5 gap-5 w-[80%] justify-between mx-auto">
+        <div className="flex flex-col justify-between   w-full">
+          <div className="relative w-full  flex z-10 bg-white pt-3 pb-3  rounded-md overflow-hidden">
+            <input
+              onChange={(e) => heandleSearchFoods(e)}
+              type="text"
+              value={searchValue}
+              className="bg-white w-full pl-9 text-x sm:text-sm focus:outline-0 pr-2 sm:pr-4  font-bold h-full"
+              placeholder="جستو جوی رستوران یا غذا ..."
+            />
+            {searchValue.length > 3 && (
+              <div onClick={() => setSearchValue("")} className=" absolute left-2 top-2 rounded-full bg-gray-200 w-6 h-6 flex items-center justify-center">
+                <svg className="cursor-pointer w-4 h-4 ">
+                  <use href="#x-mark"></use>
+                </svg>
+              </div>
+            )}
           </div>
+          {titleCateguryFoods && (
+            <div className="mt-5 text-xs relative bg-zinc-800 text-white w-[80%] pt-2 pb-2 pr-2 rounded-sm">
+              <span>{titleCateguryFoods}</span>
+              <Link to="/categuryfoods">
+                <svg
+                  onClick={() => emptyTitleCategury()}
+                  className="w-5 h-5 absolute left-1 top-1.5 text-yellow-500"
+                >
+                  <use href="#x-mark"></use>
+                </svg>
+              </Link>
+            </div>
+          )}
         </div>
         <div>
           <div className="relative">
             <div
               onClick={() => handelBox()}
-              className="flex items-center rounded-md w-full pt-2 pb-2 pr-4 pl-5 text-zinc-800 font-bold cursor-pointer gap-2  justify-center bg-gray-200"
+              className="flex  rounded-md w-full pt-2 pb-2 pr-4 pl-5 text-zinc-800 font-bold cursor-pointer gap-2  bg-gray-200"
             >
               <svg className="w-7 h-7">
                 <use href="#adjustments-horizontal"></use>
@@ -246,6 +334,7 @@ export default function CateguryFoods() {
           <SeeMoreBoxes />
         </div>
       )}
+      <Toaster position="top-center" />
 
       <FooterMobile />
     </div>

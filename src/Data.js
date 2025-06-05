@@ -462,51 +462,61 @@ const allCategury = [
     id: 1,
     title: "پیتزا",
     img: "./images/foods/papular-foods/1.jpg",
+    shortLink : "pizza"
   },
   {
     id: 2,
     title: "کباب",
     img: "./images/foods/papular-foods/2.jpg",
+    shortLink : "kabab"
   },
   {
     id: 3,
     title: "سوپ",
     img: "./images/foods/papular-foods/3.jpg",
+    shortLink : "sop"
   },
   {
     id: 4,
     title: "ساندویچ",
     img: "./images/foods/papular-foods/4.jpg",
+    shortLink : "sandewich"
   },
   {
     id: 5,
     title: "غذای ایرانی",
     img: "./images/foods/papular-foods/5.jpg",
+    shortLink : "iraninfood"
   },
   {
     id: 6,
     title: "سوخاری",
     img: "./images/foods/papular-foods/6.jpg",
+    shortLink : "sokhari"
   },
   {
     id: 7,
     title: "پاستا",
     img: "./images/foods/papular-foods/7.jpg",
+    shortLink : "pasta"
   },
   {
     id: 8,
     title: "سالاد",
     img: "./images/foods/papular-foods/8.jpg",
+    shortLink : "salad"
   },
   {
     id: 9,
     title: "صبحانه",
     img: "./images/foods/papular-foods/9.jpg",
+    shortLink : "breakefast"
   },
   {
     id: 10,
     title: "استیک",
     img: "./images/foods/papular-foods/10.jpg",
+    shortLink : "stick"
   },
 ];
 

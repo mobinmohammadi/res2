@@ -18,7 +18,9 @@ createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/categuryfoods" element={<CateguryFoods />} />
+      <Route path="/categuryfoods/*" element={<CateguryFoods />} >
+        {/* <Route path=""></Route> */}
+      </Route>
       <Route path="/restorant/:ResoruntID" element={<SinglePageRestorant />} />
       <Route path="/restorant/Signup" element={<SignUp />} />
       <Route path="/restorant/Login" element={<Login />} />
