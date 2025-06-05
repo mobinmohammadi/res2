@@ -12,6 +12,7 @@ import SinglePageRestorantMenu from "./../../Components//SinglePageRestorant/Sin
 import RestorantsData from "../../../../RestorantsData.json";
 import { CartProvider } from "../../Components/Context/Context";
 import FoodBoxes from "../../Components/FoodBoxes/FoodBoxes";
+import FooterMobile from "../../Components/FooterMobile/FooterMobile";
 
 export default function SinglePageRestorant() {
   // const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -189,7 +190,7 @@ export default function SinglePageRestorant() {
       ) : null}
 
       <div className="mt-2">
-        <FooterPc />
+        <FooterMobile />
       </div>
     </div>
   );

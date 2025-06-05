@@ -7,7 +7,6 @@ import SwalBox from "../../SwalBox/SwalBox";
 // import CkEditor from "../../CkEditor/CkEditor"
 
 export default function CommentsSections({ dataSingleResturants, allComments }) {
-  console.log(name);
   
   const [nameCreatorComment, setNameCreatorComment] = useState("");
   const wrapperTextAreaComments = useRef(null)
@@ -273,7 +272,6 @@ export default function CommentsSections({ dataSingleResturants, allComments }) 
             setTimeout(() => {
               addToVisibleComments();
 
-              console.log(" ===> ", visibleComments);
             }, 2000);
           }}
         >

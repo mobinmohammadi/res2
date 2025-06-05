@@ -32,7 +32,6 @@ export default function Login() {
       password: "",
     },
     onSubmit: async(values) => {
-      console.log(values);
       const LoginUser = {
         email: values.emailOrPhone,
         password: values.password,
@@ -49,12 +48,10 @@ export default function Login() {
         });
         const data = await respos.json()
         if(!respos.ok){
-        console.log("not Sucssus");
        
       
       }
      else{
-          console.log("Sucssus");
           
         }
       }

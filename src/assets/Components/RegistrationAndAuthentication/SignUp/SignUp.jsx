@@ -41,7 +41,6 @@ export default function SignUp() {
         phone_number: values.phone,
         role: "customer",
       };
-      console.log(newUser);
 
       try {
         const response = await fetch(`${baseUrl}/registration`, {
@@ -53,7 +52,6 @@ export default function SignUp() {
         });
 
         const data = await response.json();
-        console.log(data);
         if (response.status == 201) {
           toast.success("ثبت‌نام با موفقیت انجام شد ✅");
         } else {

@@ -15,7 +15,6 @@ export default function FooterMobile() {
     },
     onSubmit(values) {
       toast.success("ایمیل با موفقیت ارسال شد!")
-      console.log(formik.values.email);
       formik.values.email = ""
       setTimeout(() => {
         

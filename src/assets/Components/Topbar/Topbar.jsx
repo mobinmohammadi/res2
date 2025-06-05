@@ -14,18 +14,12 @@ export default function Topbar({
 }) {
   const loaderIconBasket = useRef(null);
 
-  const [isShowModalLogin, setIsShowModalLogin] = useState(false);
   const [isShowUserBasket, setIsShowUserBasket] = useState(false);
   const [isShowLayer, setIsShowLayer] = useState(false);
-  const [isUserLogin, setIsUserLogin] = useState("true");
+  const [isUserLogin, setIsUserLogin] = useState(false);
 
-  const modalLogin = useRef();
   const userInfosBox = useRef();
 
-  const openModalHandler = (e) => {
-    modalLogin.current.style.bottom = "0";
-    modalLogin.current.style.transition = "all 0.5s ease";
-  };
 
   const closeUserBasket = () => {
     setIsShowUserBasket(false);
@@ -91,7 +85,7 @@ export default function Topbar({
         className={`${
           isFixedTopBar
             ? "fixed top-0 z-30 w-full transition-all bg-slate-700 "
-            : ""
+            : "bg-white"
         } py-2`}
       >
         <div className=" relative">
@@ -109,17 +103,17 @@ export default function Topbar({
                 </svg>
               </div>
             ) : (
-              <div className="text-2xl & > *:text-sm gap-2 flex items-center justify-center ">
-                <a
+              <div  className={`${isFixedTopBar ? "text-white" : ""} text-2xl & > *:text-sm gap-2 flex items-center justify-center`}>
+                <Link to="/restorant/Login"
+
                   href="#"
-                  onClick={openModalHandler}
                   className=" h-8 w-15  rounded-md justify-center transition-all hover:bg-[#ef4123] hover:text-white flex items-center border-1 border-solid border-[#ef4123]"
                 >
-                  <span className=" inline-block ">ورود</span>
-                </a>
-                <a href="#" className="hidden sm:flex">
+                  <span className=" inline-block text-xs sm:text-sm ">ورود</span>
+                </Link>
+                <Link href="#" className="hidden sm:flex">
                   ثبت نام
-                </a>
+                </Link>
               </div>
             )}
             <div
@@ -241,45 +235,7 @@ export default function Topbar({
             </div>
           </div>
 
-          <div className=" flex justify-center items-center w-full ">
-            <div
-              ref={modalLogin}
-              className="fixed flex items-center  flex-col p-5 -bottom-[500px] right-0 z-20 bg-white rounded-t-4xl shadow-2xl w-[700px]  max-auto h-[500px]"
-            >
-              <span className="text-sky-400 text-2xl font-bold">
-                ورود به حساب کاربری
-              </span>
-              <div className="flex flex-col gap-5 pt-7">
-                <div className="flex flex-col gap-3 ">
-                  <label htmlFor="">ایمیل</label>
-                  <input
-                    className="bg-sky-100 p-5 rounded-sm focus:outline-0"
-                    type="email"
-                    name=""
-                    id=""
-                  />
-                </div>
-                <div className="flex flex-col gap-3 ">
-                  <label htmlFor="">رمز عبور</label>
-                  <input
-                    className="bg-sky-100 p-5 rounded-sm focus:outline-0"
-                    type="password"
-                    name=""
-                    id=""
-                  />
-                </div>
-                <a href="" className="text-red-300">
-                  رمز خو را فراموش کرده اید؟
-                </a>
-              </div>
-              <button
-                type="submit"
-                className="bg-sky-500 text-white pt-3 pb-3 pl-30 pr-30"
-              >
-                ورود
-              </button>
-            </div>
-          </div>
+         
         </div>
 
         <UserBasket

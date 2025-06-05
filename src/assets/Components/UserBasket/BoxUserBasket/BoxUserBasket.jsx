@@ -23,18 +23,15 @@ setArrayUserBasket, CalculatorUserBasket,addToBasketUser , item ,menu , setIdPro
 
   // افزایش تعداد یک محصول خاص در سبد خرید
   const increaseCount = (product) => {
-    // console.log(arrayUserBasket);
     
     
     const updatedBasket = [...arrayUserBasket];
     const item = updatedBasket.find((i) => i.id === product.id)
-    console.log(item);
     
     if (item) {
       item.count++;
       updateLocalStorage(updatedBasket);
 
-    //   addToBasketUser(product);
     } else {
       alert("این کالا در سبد خرید وجود ندارد 🙄");
     }
@@ -86,16 +83,12 @@ setArrayUserBasket, CalculatorUserBasket,addToBasketUser , item ,menu , setIdPro
   const LoaderDeleteFood = useRef();
 
   function styleAndDeletOnFoods(e, itemID) {
-    console.log(e.parentElement);
 
     setTimeout(() => {
       deleteFoodInUserBasket(itemID);
     }, 1000);
   }
 
-  useEffect(() => {
-    console.log(item);
-  }, []);
   return (
     <div
       ref={wrapperFoods}

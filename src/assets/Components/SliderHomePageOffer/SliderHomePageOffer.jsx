@@ -11,12 +11,7 @@ import RestorantsData from "../../../../RestorantsData.json";
 
 const SimpleSlider = () => {
   const [allRestorans, setAllRestorans] = useState(RestorantsData);
-  const settings = {
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-  };
+ 
 
   const filtredRestorantWhiteDiscount = allRestorans.filter(
     (res) => res.discount
@@ -27,13 +22,12 @@ const SimpleSlider = () => {
       <SectionHeader title="تخفیف خورده ها" />
       <div
         className="flex  gap-5  overflow-x-scroll hide-scrollbar "
-        {...settings}
       >
         <>
           <div className="flex gap-5 & > *:w-[300px]">
             {filtredRestorantWhiteDiscount.map(restorant => (
                 
-            <BoxForSlider {...restorant}/>
+            <BoxForSlider key={restorant.id} {...restorant}/>
             ))}
         
           </div>

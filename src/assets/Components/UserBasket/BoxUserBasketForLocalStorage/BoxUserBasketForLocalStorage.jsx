@@ -26,11 +26,9 @@ export default function BoxUserBasketForLocalStorage({
 
   // افزایش تعداد یک محصول خاص در سبد خرید
   const increaseCount = (product) => {
-    // console.log(arrayUserBasket);
 
     const updatedBasket = [...localStorageData];
     const item = updatedBasket.find((i) => i.id === product.id);
-    console.log(item);
 
     if (item) {
       item.count++;
@@ -87,9 +85,7 @@ export default function BoxUserBasketForLocalStorage({
     setLocalStorageData(afterDeleteOnFoods);
     if (newArryAfterDelete.length == 0) {
       setArrayUserBasket([]);
-      console.log(arrayUserBasket);
     }
-    console.log("afterDeleteOnFoods ======> ", afterDeleteOnFoods);
   };
 
   // ====================================================================
@@ -98,18 +94,7 @@ export default function BoxUserBasketForLocalStorage({
   const btnDeleteFood = useRef();
   const LoaderDeleteFood = useRef();
 
-  // function styleAndDeletOnFoods(e, itemID) {
-  //   console.log(foods.id);
 
-  //   setLocalStorageData(arrayUserBasket)
-  //   setTimeout(() => {
-  //     deleteFoodInUserBasket(foods.id);
-  //     console.log(localStorageData);
-
-  //     // setArrayUserBasket(arrayUserBasket);
-  //     localStorage.setItem("basket", JSON.stringify(arrayUserBasket));
-  //   }, 1000);
-  // }
 
   return (
     <div

@@ -3,13 +3,14 @@ import { Link, useParams } from "react-router";
 
 export default function BoxesFood({allRestorants , allComments}) {
 
-  const {id ,city, name , address ,image} = allRestorants
+  const {id ,city, name  ,image} = allRestorants
   
-  const [singleFoodsComment , setSingleFoodsComment] = useState([])
+  
+  // const [singleFoodsComment , setSingleFoodsComment] = useState([])
   // const baseUrl = import.meta.env.VITE_BASE_URL;
 
   
-  const modePage = useParams()
+  // const modePage = useParams()
 
   // useEffect(() => {
   //   fetch(`${baseUrl}/restaurants/${id}/comments`)
@@ -20,25 +21,11 @@ export default function BoxesFood({allRestorants , allComments}) {
   
   return (
     <>
-      <svg className="hidden">
-        <symbol
-          id="star"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          class="size-6"
-        >
-          <path
-            fillRule="evenodd"
-            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-            clipRule="evenodd"
-          />
-        </symbol>
-      </svg>
+      
 
     <Link to={`/restorant/${id}`}>
       <div className=" pt-5  bg-white p-5 min-h-36 w-full rounded-md">
-        <div className="relative">
+        <div className="relative"> 
           <img className="w-full h-[10rem]   object-cover" src={image} alt="فاقد عکس" />
           <svg className=" absolute z-10 cursor-pointer text-amber-50 top-2 right-2 w-10 h-10 bg-">
             <use href="#heart"></use>
@@ -60,10 +47,10 @@ export default function BoxesFood({allRestorants , allComments}) {
               </div>
               <div className="flex flex-col items-right leading-5 ">
                 <span className="text-sm">{city}</span>
-                <span className="text-xs text-gray-500">({address})</span>
+                {/* <span className="text-xs text-gray-500">()</span> */}
               </div>
             </div>
-            {singleFoodsComment.length ? (
+            {/* {singleFoodsComment.length ? (
 
             <div className="flex sm:items-center flex-col w-full items-end sm:w-[50%]">
               <div className="text-gray-500 text-xs items-center">
@@ -88,7 +75,7 @@ export default function BoxesFood({allRestorants , allComments}) {
                 </svg>
               </div>
             </div>
-            ) : <div className="text-xs bg-green-800 w-full text-center text-white pt-1 pb-1 rounded-sm mt-1" > فعلا بدون نظر 🤷‍♂️</div>}
+            ) : <div className="text-xs bg-green-800 w-full text-center text-white pt-1 pb-1 rounded-sm mt-1" > فعلا بدون نظر 🤷‍♂️</div>} */}
           </div>
         </div>
         <div className=""></div>

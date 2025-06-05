@@ -16,10 +16,7 @@ export default function AroundMe({arrayUserBasket , setArrayUserBasket}) {
   const [allRestorants, setAllRestorants] = useState(RestorantsData);
   
   
-  useEffect(() => {
-    
-    console.log("allRestorants ====> " , allRestorants);
-  }, []);
+
 
   return (
     <>

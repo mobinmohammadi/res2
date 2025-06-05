@@ -141,7 +141,6 @@ export default function NewRestourants() {
               tagRestorants: "",
             }}
             validationSchema={eroreHandler}
-            onSubmit={(values) => console.log(values)}
           >
             {({
               values,
