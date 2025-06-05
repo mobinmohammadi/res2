@@ -231,12 +231,14 @@ export default function CateguryFoods() {
             <span className="mt-0.5 text-xs sm:text-sm">مورد یافت شد</span>
           </div>
         </div>
-        <div className="relative border-b-2 w-48 mt-10 pb-3 border-dashed border-zinc-700">
-          <span className="absolute bg-yellow-500 w-4 h-4 rounded-sm top-1"></span>
-          <span className="mr-5 text-sm font-bold text-red-800">
-            {titleFilter}
-          </span>
-        </div>
+        {titleFilter && (
+          <div className="relative border-b-2 w-48 mt-10 pb-3 border-dashed border-zinc-700">
+            <span className="absolute bg-yellow-500 w-4 h-4 rounded-sm top-1"></span>
+            <span className="mr-5 text-sm font-bold text-red-800">
+              {titleFilter}
+            </span>
+          </div>
+        )}
         {!allRestourants.length ? (
           <div className="w-full flex items-center justify-center">
             <span className="bg-red-500 mt-5 w-full mb-5 items-center justify-center text-center pt-2 pb-2 text-white rounded-md text-sm sm:text-xl">
