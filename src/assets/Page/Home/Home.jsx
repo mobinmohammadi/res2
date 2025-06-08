@@ -15,8 +15,15 @@ import FooterMobile from "../../Components/FooterMobile/FooterMobile.jsx";
 import { Toaster, toast } from "react-hot-toast";
 import SimpleSlider from "../../Components/SliderHomePageOffer/SliderHomePageOffer.jsx";
 import PreFooter from "../../Components/FooterMobile/PreFooter/PreFooter.jsx";
+import { useLocation } from "react-router";
 
 export default function Home() {
+  const { pathName } = useLocation;
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathName]);
+
   // const baseUrl = import.meta.env.VITE_BASE_URL;
   const [city, setCity] = useState("");
   const [titleSearch, setTitleSearch] = useState("");

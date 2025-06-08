@@ -14,6 +14,7 @@ import { CartProvider } from "../../Components/Context/Context";
 import FoodBoxes from "../../Components/FoodBoxes/FoodBoxes";
 import FooterMobile from "../../Components/FooterMobile/FooterMobile";
 import { Toaster } from "react-hot-toast";
+import ScrollToTop from "../../Components/ScrollToTop/ScrollToTop";
 
 export default function SinglePageRestorant() {
   // const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -21,6 +22,12 @@ export default function SinglePageRestorant() {
   const [valueForSearch, setValueForSearch] = useState("");
   const [allRestorants, setAllRestorants] = useState(RestorantsData);
   const [countProduct, setCountProduct] = useState(0);
+  const loaderCategury = useRef(null);
+
+  setTimeout(() => {
+    loaderCategury.current.classList.remove("fixed");
+    loaderCategury.current.classList.add("hidden");
+  }, 1700);
 
   const paramsID = useParams().ResoruntID;
   let [dataSingleResturants, setDataSingleResturants] = useState({});
@@ -122,6 +129,7 @@ export default function SinglePageRestorant() {
 
   return (
     <div className="">
+      <ScrollToTop />
       <Topbar
         arrayUserBasket={arrayUserBasket}
         setArrayUserBasket={setArrayUserBasket}
@@ -188,6 +196,12 @@ export default function SinglePageRestorant() {
       <div className="mt-2">
         <Toaster position="top-center" />
         <FooterMobile />
+      </div>
+      <div
+        ref={loaderCategury}
+        className="fixed bg-sky-800 flex items-center justify-center top-0 w-full h-full z-50"
+      >
+        <span className="loader-categury"></span>
       </div>
     </div>
   );

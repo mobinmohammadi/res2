@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 
 export default function BoxesFood({allRestorants , allComments}) {
 
@@ -18,13 +18,19 @@ export default function BoxesFood({allRestorants , allComments}) {
   //   .then(result => setSingleFoodsComment(result))
     
   // } , [])
+
+  const navigateOnsPageFoods = useNavigate()
+
+  const goToSinglePageFood = () => {
+    navigateOnsPageFoods(`/restorant/${id}`)
+  }
   
   return (
     <>
       
 
     <div>
-         <Link to={`/restorant/${id}`}>
+         <div onClick={() => goToSinglePageFood()}>
            <div className=" pt-5 max-w-92 w-full  bg-white p-5 min-h-36 rounded-md">
              <div className="relative">
                {discount ? (
@@ -98,7 +104,7 @@ export default function BoxesFood({allRestorants , allComments}) {
              </div>
              <div className=""></div>
            </div>
-         </Link>
+         </div>
        </div>
     </>
   );

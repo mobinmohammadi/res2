@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PreFooter() {
   return (
-    <div className=" bg-white pt-14 pb-5 border-t-2 border-t-slate-500">
+    <div className=" bg-white  pt-14 pb-5 border-t-2 border-t-slate-500">
       <div className="container-custom flex flex-col gap-12">
         <div className="flex flex-col text-center gap-10  items-center ">
           <span className="text-zinc-800 font-bold text-xl leading-8 max-w-[310px] sm:max-w-max sm:text-3xl ">

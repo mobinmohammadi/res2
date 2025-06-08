@@ -14,6 +14,10 @@ import PanelSellerResturants from "./assets/Page/PanelSellerResturants/PanelSell
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import FavoriteFoods from "./assets/Page/Home/FavoriteFoods/FavoriteFoods.jsx";
+import ProductPayment from "./assets/Components/ProductPayment/ProductPayment.jsx";
+import ScrollToTop from "./assets/Components/ScrollToTop/ScrollToTop.jsx";
+
+
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>
@@ -24,7 +28,9 @@ createRoot(document.getElementById("root")).render(
       <Route path="/restorant/:ResoruntID" element={<SinglePageRestorant />} />
       <Route path="/restorant/Signup" element={<SignUp />} />
       <Route path="/restorant/Login" element={<Login />} />
+      <Route path="/restorant/Login" element={<Login />} />
       <Route path="/restorant/favoritefoods" element={<FavoriteFoods />} />
+      <Route path="/restorant/productPayment" element={<ProductPayment />} />
       <Route path="/sallerpanel/*" element={<PanelSellerResturants />}>
         <Route path="home" element={<HomePanel />} />
         <Route path="newrestorants" element={<NewRestourants />} />
