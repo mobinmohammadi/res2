@@ -8,7 +8,7 @@ import FooterPc from "../FooterPc/FooterPc";
 import RestorantsData from "./../../../../RestorantsData.json";
 import FooterMobile from "../FooterMobile/FooterMobile";
 import { Toaster } from "react-hot-toast";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import BoxesSearchCategury from "./BoxesSearchCategury/BoxesSearchCategury";
 export default function CateguryFoods() {
   const [searchValue, setSearchValue] = useState("");
@@ -136,6 +136,17 @@ export default function CateguryFoods() {
       : [];
   // ===============================================================
 
+  // ================   Delete   Title  Categury   =================
+
+  const navigate = useNavigate()
+  const deleteTitleCategury = () => {
+    const refresh = () => {
+      navigate("/categuryfoods")
+    }
+  };
+
+  // ===============================================================
+
   return (
     <div className="flex flex-col">
       <svg className="hidden">
@@ -196,10 +207,14 @@ export default function CateguryFoods() {
           {titleCateguryFoods && (
             <div className="mt-5 text-xs relative bg-zinc-800 text-white w-[80%] pt-2 pb-2 pr-2 rounded-sm">
               <span>{titleCateguryFoods}</span>
-              <Link to="/categuryfoods">
-                <svg className="w-5 h-5 absolute left-1 top-1.5 text-yellow-500">
-                  <use href="#x-mark"></use>
-                </svg>
+              <Link to="/categuryfoods" className="">
+
+              <svg
+                
+                className="w-5 h-5 absolute left-1 top-1.5 text-yellow-500"
+              >
+                <use href="#x-mark"></use>
+              </svg>
               </Link>
             </div>
           )}
@@ -266,7 +281,7 @@ export default function CateguryFoods() {
       )}
       <div
         ref={loaderCategury}
-        className="fixed bg-sky-800 flex items-center justify-center top-0 w-full h-full z-20"
+        className="fixed bg-sky-800 flex items-center justify-center top-0 w-full h-full z-50"
       >
         <span className="loader-categury"></span>
       </div>

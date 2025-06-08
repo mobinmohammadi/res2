@@ -17,8 +17,8 @@ export default function BoxesSearchCategury({
   const [filterTitleFoods, setFilterTitleFoods] = useState("");
 
   const handelBox = () => {
-    boxsFiltred.current.classList.remove("opacity-0", "top-90%");
-    boxsFiltred.current.classList.add("top-[110%]", "transition-all");
+    boxsFiltred.current.classList.remove("opacity-0", "top-90%" , "-z-10");
+    boxsFiltred.current.classList.add("top-[110%]", "transition-all" , "z-20");
     setIsShowLayer(true);
   };
 
@@ -71,7 +71,7 @@ export default function BoxesSearchCategury({
 
         <div
           ref={boxsFiltred}
-          className={`absolute opacity-0 transition-all  z-20 left-0  bg-white w-72 sm:w-92 rounded-2xl p-5`}
+          className={`absolute opacity-0 -z-10 transition-all left-0  bg-white w-72 sm:w-92 rounded-2xl p-5`}
         >
           <div className="flex text-xs sm:text-sm justify-between pb-5 & > *:cursor-pointer $ > *:pb-3">
             <span
@@ -112,6 +112,7 @@ export default function BoxesSearchCategury({
                       className=""
                       type="checkbox"
                       checked={filterTitleFoods === item}
+                      onChange={() => setTitleFilter(item)}
                       name=""
                       id=""
                     />
