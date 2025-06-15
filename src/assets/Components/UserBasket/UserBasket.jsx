@@ -1,23 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./UserBasket.css";
+import { CartContext } from "../../Context/BasketContext";
 import BoxUserBasket from "./BoxUserBasket/BoxUserBasket";
-import BoxUserBasketForLocalStorage from "./BoxUserBasketForLocalStorage/BoxUserBasketForLocalStorage";
-export default function UserBasket({
-  deleteFoodInUserBasket,
-  fainalyAllPriceFoods,
-  isShowUserBasket,
-  cancelAction,
-  arrayUserBasket,
-  setArrayUserBasket,
-  setIdProductInBasket,
-  addToBasketUser,
-}) {
+export default function UserBasket({ isShowUserBasket, cancelAction }) {
   const wrapperUserBasket = useRef(null);
 
   // ===========  Style Wrapper User Basket  ===========================
 
+  const { cart, addToBasketUser, removeInToBasketUser, allPriceProdcuts } =
+    useContext(CartContext);
+
   function styleWrapperUserBasket() {
-    if (arrayUserBasket?.length > 4) {
+    if (cart?.length > 4) {
       wrapperUserBasket.current.classList.add("h-[450px]", "overflow-y-scroll");
     } else {
       wrapperUserBasket.current.classList.remove("h-[450px]");
@@ -25,47 +19,7 @@ export default function UserBasket({
   }
   useEffect(() => {
     styleWrapperUserBasket();
-  }, [arrayUserBasket]);
-
-  const [localStorageData, setLocalStorageData] = useState([]);
-
-  useEffect(() => {
-    const storedLocal = JSON.parse(localStorage.getItem("basket")) || [];
-    if (storedLocal) {
-      setLocalStorageData(storedLocal);
-    }
-  }, []);
-
-  // =====================    All Price In Local Storage ==================
-
-  const [dataPriceLocalStorage, setDataPriceLocalStorage] = useState(0);
-  const savePriceTolocalStorage = (price) => {
-    localStorage.setItem("allPrice", JSON.stringify(price));
-  };
-  useEffect(() => {
-    const allPriceInLocalStorage = localStorageData.map(
-      (item) => item.price * (item.count || 1)
-    );
-    let resultAllPriceFoodsInLocalStorage = allPriceInLocalStorage.reduce(
-      (acc, num) => acc + num,
-      0
-    );
-    setDataPriceLocalStorage(resultAllPriceFoodsInLocalStorage);
-  }, [arrayUserBasket , localStorageData ]);
-
-
-  // ======================================================================
-
-  // ============     Canditiondal Rendering For Basket ====================
-
-  const basketToRender =
-    arrayUserBasket?.length > 0
-      ? arrayUserBasket
-      : localStorageData?.length > 0
-      ? localStorageData
-      : [];
-
-  // =======================================================================
+  }, [cart]);
 
   return (
     <>
@@ -85,40 +39,13 @@ export default function UserBasket({
             </svg>
           </div>
           <div ref={wrapperUserBasket} className="flex flex-col mt-3 gap-3">
-            {arrayUserBasket?.length || localStorageData.length ? (
+            {cart.length ? (
               <span className="bg-amber-500 text-white text-sm w-full block text-center pt-2 pb-2 rounded-sm mt-2">
-                {arrayUserBasket?.length || localStorageData.length} عدد غذا در
-                لیست خرید شما موجود است
+                {cart.length} عدد غذا در لیست خرید شما موجود است
               </span>
             ) : null}
-            {basketToRender?.length > 0 ? (
-              localStorageData?.length > 0 ? (
-                localStorageData.map((foods) => (
-                  <BoxUserBasketForLocalStorage
-                    deleteFoodInUserBasket={deleteFoodInUserBasket}
-                    setIdProductInBasket={setIdProductInBasket}
-                    localStorageData={localStorageData}
-                    setArrayUserBasket={setArrayUserBasket}
-                    arrayUserBasket={setArrayUserBasket}
-                    setLocalStorageData={setLocalStorageData}
-                    foods={foods}
-                    addToBasketUser={addToBasketUser}
-                    menu={arrayUserBasket}
-                  />
-                ))
-              ) : (
-                arrayUserBasket?.map((item) => (
-                  <BoxUserBasket
-                    arrayUserBasket={arrayUserBasket}
-                    setArrayUserBasket={setArrayUserBasket}
-                    addToBasketUser={addToBasketUser}
-                    deleteFoodInUserBasket={deleteFoodInUserBasket}
-                    item={item}
-                    menu={arrayUserBasket}
-                    setIdProductInBasket={setIdProductInBasket}
-                  />
-                ))
-              )
+            {cart.length ? (
+              cart.map((foods) => <BoxUserBasket foods={foods} />)
             ) : (
               <div className="flex flex-col items-center justify-center h-full">
                 <img
@@ -132,9 +59,9 @@ export default function UserBasket({
           </div>
         </div>
         <div className="flex items-center gap-5 flex-col">
-          {arrayUserBasket?.length || localStorageData.length ? (
+          {cart.length ? (
             <>
-              <div className="flex gap-6">
+              <div className="flex gap-6 pt-3">
                 <div className="flex gap-1 items-center">
                   <svg className="w-5 h-5">
                     <use href="#banknotes"></use>
@@ -142,13 +69,11 @@ export default function UserBasket({
                   <span className="text-sm">مجموع هزینه:</span>
                 </div>
                 <div className="flex text-sm items-center gap-1">
-                  {basketToRender.length > 0 && (
-                    <span>
-                      {fainalyAllPriceFoods > 0
-                        ? fainalyAllPriceFoods.toLocaleString()
-                        : dataPriceLocalStorage.toLocaleString()}
-                      تومان
-                    </span>
+                  {cart.length > 0 && (
+                    <div className="flex gap-1 ">
+                      <span>{allPriceProdcuts.toLocaleString()}</span>
+                      <span>تومان</span>
+                    </div>
                   )}
                 </div>
               </div>

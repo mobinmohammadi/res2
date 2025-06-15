@@ -8,13 +8,11 @@ import CateguryFoods from "./assets/Components/CateguryFoods/CateguryFoods.jsx";
 import UserBasket from "./assets/Components/UserBasket/UserBasket";
 import "leaflet/dist/leaflet.css";
 import "react-toastify/dist/ReactToastify.css";
-import { CartProvider } from "./assets/Components/Context/Context.jsx";
 
 function App() {
   return (
       <div>
-        {/* <UserBasket/> */}
-        {/* <CateguryFoods /> */}
+       
       </div>
   );
 }

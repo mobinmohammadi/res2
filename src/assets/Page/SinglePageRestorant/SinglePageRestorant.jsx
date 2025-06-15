@@ -10,7 +10,6 @@ import { useParams } from "react-router";
 import MenuSinglePageRestorant from "././../../Components//SinglePageRestorant/MenuSinglePageRestorant/MenuSinglePageRestorant";
 import SinglePageRestorantMenu from "./../../Components//SinglePageRestorant/SinglePageRestorantMenus/SinglePageRestorantMenus";
 import RestorantsData from "../../../../RestorantsData.json";
-import { CartProvider } from "../../Components/Context/Context";
 import FoodBoxes from "../../Components/FoodBoxes/FoodBoxes";
 import FooterMobile from "../../Components/FooterMobile/FooterMobile";
 import { Toaster } from "react-hot-toast";
@@ -37,7 +36,7 @@ export default function SinglePageRestorant() {
       (restoran) => restoran.id == paramsID
     );
     setDataSingleResturants(foundRestorants[0]);
-    
+
     setAllComments(foundRestorants[0].comments);
   }, [allRestorants, paramsID]);
 
@@ -103,27 +102,6 @@ export default function SinglePageRestorant() {
     CalculatorUserBasket();
   }, [arrayUserBasket]);
 
-  useEffect(() => {
-    localStorage.setItem("basket", JSON.stringify(arrayUserBasket));
-  }, [arrayUserBasket]);
-
-  // ====================================================================
-
-  // ===========    Delete Foods In UserBasket  =========================
-  // const [afterDeleteFoods, setAfterDeleteFoods] = useState();
-  const deleteFoodInUserBasket = (foodID) => {
-    const currentBasket = JSON.parse(localStorage.getItem("basket")) || [];
-
-    const updatedLocalStorageAfterDelete = currentBasket.filter(
-      (item) => item.id !== foodID
-    );
-    // setAfterDeleteFoods(updatedLocalStorageAfterDelete);
-    localStorage.setItem(
-      "basket",
-      JSON.stringify(updatedLocalStorageAfterDelete)
-    );
-    setArrayUserBasket(updatedLocalStorageAfterDelete);
-  };
   // ====================================================================
 
   const [idProductInBasket, setIdProductInBasket] = useState();
@@ -131,15 +109,7 @@ export default function SinglePageRestorant() {
   return (
     <div className="">
       <ScrollToTop />
-      <Topbar
-        arrayUserBasket={arrayUserBasket}
-        setArrayUserBasket={setArrayUserBasket}
-        CalculatorUserBasket={CalculatorUserBasket}
-        addToBasketUser={addToBasketUser}
-        setIdProductInBasket={setIdProductInBasket}
-        deleteFoodInUserBasket={deleteFoodInUserBasket}
-        fainalyAllPriceFoods={fainalyAllPriceFoods}
-      />
+      <Topbar />
       <HeaderRestorant
         dataSingleResturants={dataSingleResturants}
         allComments={allComments}

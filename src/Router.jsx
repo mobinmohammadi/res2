@@ -16,10 +16,13 @@ import "slick-carousel/slick/slick-theme.css";
 import FavoriteFoods from "./assets/Page/Home/FavoriteFoods/FavoriteFoods.jsx";
 import ProductPayment from "./assets/Components/ProductPayment/ProductPayment.jsx";
 import ScrollToTop from "./assets/Components/ScrollToTop/ScrollToTop.jsx";
+import { ToastContainer } from "react-toastify";
 
 
 function Router() {
   return (
+    <>
+    
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/categuryfoods/*" element={<CateguryFoods />}>
@@ -38,6 +41,9 @@ function Router() {
         <Route path="newrestorants" element={<NewRestourants />} />
       </Route>
     </Routes>
+    <ToastContainer position="top-left" autoClose={3000} />
+    </>
+
   );
 }
 

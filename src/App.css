@@ -23,6 +23,16 @@ body {
 .Loader-searchTopBar {
 }
 
+.Toastify__toast{
+  font-family: "Dana"!important;
+  background-color:#222b32!important;
+  color:#f1f5f9!important;
+  font-size: 12px!important ;
+  width: 200px!important;
+  justify-content: start;
+  align-items: start;
+}
+
 .Loader-searchTopBar {
   width: 48px;
   height: 48px;

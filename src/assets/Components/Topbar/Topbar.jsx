@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 import EasyAddress from "../EasyAddress/EasyAddress";
 import UserBasket from "../UserBasket/UserBasket";
 import { Link } from "react-router";
+import { CartContext } from "../../Context/BasketContext";
 
 export default function Topbar({
   deleteFoodInUserBasket,
@@ -13,13 +14,14 @@ export default function Topbar({
   CalculatorUserBasket,
 }) {
   const loaderIconBasket = useRef(null);
+  const { cart } = useContext(CartContext);
+  
 
   const [isShowUserBasket, setIsShowUserBasket] = useState(false);
   const [isShowLayer, setIsShowLayer] = useState(false);
   const [isUserLogin, setIsUserLogin] = useState(false);
 
   const userInfosBox = useRef();
-
 
   const closeUserBasket = () => {
     setIsShowUserBasket(false);
@@ -61,22 +63,6 @@ export default function Topbar({
   // ==================================================================
   // const loaderAddToBasket = useRef(null);
   const [isShowLoaderAddToBasket, setIsShowLoaderAddToBasket] = useState(false);
-  const [dataLocalStorage, setDataLocalStorage] = useState({});
-
-  useEffect(() => {
-    const storedByLocalStorage =
-      JSON.parse(localStorage.getItem("basket")) || [];
-    if (storedByLocalStorage.length) {
-      setDataLocalStorage(storedByLocalStorage);
-    }
-  }, []);
-
-  const resultWhatsBasket =
-    arrayUserBasket?.length > 0
-      ? arrayUserBasket
-      : dataLocalStorage?.length > 0
-      ? dataLocalStorage
-      : [];
 
   return (
     <>
@@ -103,13 +89,19 @@ export default function Topbar({
                 </svg>
               </div>
             ) : (
-              <div  className={`${isFixedTopBar ? "text-white" : ""} text-2xl & > *:text-sm gap-2 flex items-center justify-center`}>
-                <Link to="/restorant/Login"
-
+              <div
+                className={`${
+                  isFixedTopBar ? "text-white" : ""
+                } text-2xl & > *:text-sm gap-2 flex items-center justify-center`}
+              >
+                <Link
+                  to="/restorant/Login"
                   href="#"
                   className=" h-8 w-15  rounded-md justify-center transition-all hover:bg-[#ef4123] hover:text-white flex items-center border-1 border-solid border-[#ef4123]"
                 >
-                  <span className=" inline-block text-xs sm:text-sm ">ورود</span>
+                  <span className=" inline-block text-xs sm:text-sm ">
+                    ورود
+                  </span>
                 </Link>
                 <Link href="#" className="hidden sm:flex">
                   ثبت نام
@@ -194,24 +186,17 @@ export default function Topbar({
               }}
               className="relative"
             >
-              {resultWhatsBasket.length ? (
-                dataLocalStorage.length > 0 ? (
-                  <div className="absolute text-xs -right-2 -top-2 flex items-center justify-center text-white  bg-red-500 w-5 h-5 rounded-2xl">
-                    <span className="mt-1">{dataLocalStorage?.length}</span>
-                  </div>
-                ) : (
-                  <div className="absolute text-xs -right-2 -top-2 flex items-center justify-center text-white  bg-red-500 w-5 h-5 rounded-2xl">
-                    <span className="mt-1">{arrayUserBasket?.length}</span>
-                  </div>
-                )
-              ) : null}
-              {dataLocalStorage?.length || arrayUserBasket?.lenght ? (
+              {cart.length > 0 && (
                 <div className="absolute text-xs -right-2 -top-2 flex items-center justify-center text-white  bg-red-500 w-5 h-5 rounded-2xl">
-                  <span className="mt-1">
-                    {dataLocalStorage?.length || arrayUserBasket?.length}
-                  </span>
+                  <span className="mt-1">{cart?.length}</span>
                 </div>
-              ) : null}
+              )}
+
+              {/* {cart.length && (
+                <div className="absolute text-xs -right-2 -top-2 flex items-center justify-center text-white  bg-red-500 w-5 h-5 rounded-2xl">
+                  <span className="mt-1">{cart.length}</span>
+                </div>
+              )} */}
               {/* <span className="Loader-Basket absolute -right-1 shadow-2xl -top-1"></span> */}
               <div className="cursor-pointer relative">
                 <div
@@ -234,8 +219,6 @@ export default function Topbar({
               </div>
             </div>
           </div>
-
-         
         </div>
 
         <UserBasket

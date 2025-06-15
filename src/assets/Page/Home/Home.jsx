@@ -10,7 +10,6 @@ import PreeSeeCitys from "../../../Data.js";
 
 import AllCitis from "../../../Data.js";
 import CityNameFreeSee from "../../Components/CityNameFreeSee/CityNameFreeSee.jsx";
-import { CartProvider } from "../../Components/Context/Context.jsx";
 import FooterMobile from "../../Components/FooterMobile/FooterMobile.jsx";
 import { Toaster, toast } from "react-hot-toast";
 import SimpleSlider from "../../Components/SliderHomePageOffer/SliderHomePageOffer.jsx";
