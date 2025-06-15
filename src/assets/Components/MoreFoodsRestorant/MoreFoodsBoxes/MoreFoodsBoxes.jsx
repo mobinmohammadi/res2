@@ -10,31 +10,25 @@ const MoreFoodsBoxes = ({
   dataSingleResturantsMenus,
 
 }) => {
-  // تعداد فعلی محصول در سبد خرید (صرفاً برای نمایش داخلی، البته خیلی استفاده نشده)
   const [count, setCount] = useState(0);
 
-  // وضعیت لودر برای دکمه "افزودن به سبد خرید"
   const [isStyleLoader, setIsStyleLoader] = useState(false);
 
-  // سبد خرید که از localStorage بارگذاری میشه (اولین بار)
   const [arrayUserBasket, setArrayUserBasket] = useState(() => {
     const stored = localStorage.getItem("basket");
     return stored ? JSON.parse(stored) : [];
   });
 
-  // ارجاع‌ها (برای دسترسی مستقیم به DOM در صورت نیاز، اینجا فعلاً استفاده زیادی نداره)
   const svgUserBasket = useRef();
   const loaderAddTobasket = useRef();
   const minusIcon = useRef();
   const btnAddToBasket = useRef();
 
-  // آپدیت کردن سبد خرید هم در localStorage و هم در state
   const updateLocalStorage = (basket) => {
     localStorage.setItem("basket", JSON.stringify(basket));
     setArrayUserBasket(basket);
   };
 
-  // اضافه کردن محصول به سبد خرید و فعال کردن لودر به مدت ۱ ثانیه
   const handleAddToBasketAndStyle = (menuItem) => {
     const updatedBasket = [...arrayUserBasket];
     const existingItem = updatedBasket.find((item) => item.id === menuItem.id);

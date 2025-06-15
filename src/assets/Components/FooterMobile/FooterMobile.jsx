@@ -23,7 +23,7 @@ export default function FooterMobile() {
     },
   });
   return (
-    <div className="bg-[#283646] shadow-2xl flex flex-col relative w-full  pt-5 pr-3 pl-3 pb-5 justify-between items-center">
+    <div className="bg-[#283646] ml-0 shadow-2xl container-footer_and__topBar flex flex-col relative w-full  pt-5 pr-3 pl-3 pb-5 justify-between items-center">
       <div className="flex flex-col pb-5 items-center sm:items-start pr-4 pl-4 sm:flex-row text-center gap-3 justify-between w-full & > *:text-white/90">
         <div className="border-b-1 sm:border-b-0 w-full sm:w-auto pb-4 sm:pb-0 border-slate-200 sm:border-0 border-solid">
           <span className="text-[#0d99ff] text-xs sm:text-base">

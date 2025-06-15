@@ -84,7 +84,7 @@ export default function Topbar({
       <div
         className={`${
           isFixedTopBar
-            ? "fixed top-0 z-30 w-full transition-all bg-slate-700 "
+            ? "fixed  top-0 z-30 w-full transition-all bg-slate-700 "
             : "bg-white"
         } py-2`}
       >

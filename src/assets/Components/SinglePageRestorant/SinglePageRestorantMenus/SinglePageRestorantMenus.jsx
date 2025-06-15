@@ -17,15 +17,8 @@ export default function SinglePageRestorantMenu({
 
 
 
-  const [menusResturants, setMenusResturants] = useState([]);
   const dataSingleResturantsMenus = dataSingleResturants.menu;
-  // useEffect(() => {
-  //   fetch(`${BaseUrl}/restaurants`)
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       setMenusResturants(result);
-  //     });
-  // }, []);
+
 
 
 
@@ -63,7 +56,7 @@ export default function SinglePageRestorantMenu({
                 <div className=" flex w-full border-solid shadow-2xl    items-center justify-center pt-3 bg-white">
                   <div className="  mx-auto flex items-center  overflow-x-scroll hide-scrollbar justify-center gap-14">
                     {categuryTitleFoods.categuryTitleFoods.map((item) => (
-                      <div className="">
+                      <div key={item.id} className="">
                         <SliderTitleFoods
                           mainCategury={mainCategury}
                           setMainCategury={setMainCategury}

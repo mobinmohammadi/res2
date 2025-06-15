@@ -29,7 +29,7 @@ export default function SinglePageRestorant() {
     loaderCategury.current.classList.add("hidden");
   }, 1700);
 
-  const paramsID = useParams().ResoruntID;
+  const paramsID = useParams().restaurantID;
   let [dataSingleResturants, setDataSingleResturants] = useState({});
   const [allComments, setAllComments] = useState([]);
   useEffect(() => {
@@ -37,6 +37,7 @@ export default function SinglePageRestorant() {
       (restoran) => restoran.id == paramsID
     );
     setDataSingleResturants(foundRestorants[0]);
+    
     setAllComments(foundRestorants[0].comments);
   }, [allRestorants, paramsID]);
 

@@ -254,7 +254,7 @@ export default function CommentsSections({ dataSingleResturants, allComments }) 
         </div>
        
         {productsToShow.map((comment) => (
-          <div className="rounded-md overflow-hidden m-4 w-[90%] sm:w-[70%] mx-auto  shadow-[box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;  ]">
+          <div key={comment.id} className="rounded-md overflow-hidden m-4 w-[90%] sm:w-[70%] mx-auto  shadow-[box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;  ]">
             <CommentsBoxes
               showBoxesForAddComments={showBoxesForAddComments}
               setNameCreatorComment={setNameCreatorComment}

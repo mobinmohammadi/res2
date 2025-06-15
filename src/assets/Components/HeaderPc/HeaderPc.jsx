@@ -7,7 +7,7 @@ import EasyAddress from "../EasyAddress/EasyAddress";
 export default function HeaderPc({city}) {
   return (
     <>
-      <div className="font-Dana bg-white ">
+      <div className="font-Dana bg-white container-footer_and__topBar ">
         <Topbar />
         <EasyAddress city={city} />
       </div>
