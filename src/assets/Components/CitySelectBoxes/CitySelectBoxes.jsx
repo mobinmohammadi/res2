@@ -6,7 +6,7 @@ export default function CitySelectBoxes(props) {
     
   
     
-    <li className="pr-2">
+    <li className="pr-2 flex">
       <svg className="w-5 h-5 sm:w-6 sm:h-6">
         <use href="#map-pin"></use>
       </svg>

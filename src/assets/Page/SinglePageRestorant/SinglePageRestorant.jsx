@@ -168,10 +168,7 @@ export default function SinglePageRestorant() {
         <Toaster position="top-center" />
         <FooterMobile />
       </div>
-      <div
-        ref={loaderCategury}
-        className="fixed bg-sky-800 flex items-center justify-center top-0 w-full h-full z-50"
-      >
+      <div ref={loaderCategury} className="fixed bg-sky-800 flex items-center justify-center top-0 w-full h-full z-50">
         <span className="loader-categury"></span>
       </div>
     </div>
